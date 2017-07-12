@@ -21,12 +21,14 @@ end
 RSpec.describe 'A cup of coffee' do
   let(:coffee) { Coffee.new }
 
-  it 'costs $1' do
+  # Tagged: run just this example with `rspec --tag milky:false`
+  it 'costs $1', milky: false do
     expect(coffee.price).to eql(1.00)
   end
 
   # context is an alias for describe, but makes it clear when describing a subset of behaviors
-  fcontext 'with milk' do
+  # Tagged: run just this example with `rspec --tag milky:true`
+  context 'with milk', milky: true do
     before { coffee.add :milk }
     it 'costs $1.25' do
       expect(coffee.price).to eql(1.25)
