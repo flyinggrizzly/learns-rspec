@@ -26,7 +26,7 @@ RSpec.describe 'A cup of coffee' do
   end
 
   # context is an alias for describe, but makes it clear when describing a subset of behaviors
-  context 'with milk' do
+  fcontext 'with milk' do
     before { coffee.add :milk }
     it 'costs $1.25' do
       expect(coffee.price).to eql(1.25)
