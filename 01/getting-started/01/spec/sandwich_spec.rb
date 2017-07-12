@@ -6,6 +6,7 @@
 Sandwich = Struct.new(:taste, :toppings)
 
 RSpec.describe 'An ideal sandwich' do
+  # use a before hook to extract sandwich instantiation code and avoid repetition
   before { @sandwich = Sandwich.new('delicious', []) }
 
   it 'is delicious' do
