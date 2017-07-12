@@ -6,11 +6,9 @@
 Sandwich = Struct.new(:taste, :toppings)
 
 RSpec.describe 'An ideal sandwich' do
-  # define a Ruby helper to instantiate sandwiches when necessary
-  # avoids overhead of having instance variables every time
-  def sandwich
-    @sandwich ||= Sandwich.new('delicious', [])
-  end
+  # Use RSPec's 'let' give us the sandwich. Cleaner code, and avoids
+  # weird edgecases with memoization
+  let(:sandwich) { Sandwich.new('delicious', []) }
 
   it 'is delicious' do
     taste = sandwich.taste
