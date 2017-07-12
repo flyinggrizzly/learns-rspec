@@ -48,21 +48,11 @@ RSpec.describe 'A cup of coffee' do
       expect(coffee.price).to eql(1.25)
     end
 
-    # Pending example with expectation to be skipped
     it 'is light in color' do
-      # Including the pending helper means that any code below it will be skipped
-      # Any code above it is still expected to pass
-      # You should include an explanation why the example is still pending
-      pending 'color not implemented yet'
       expect(coffee.color).to be(:light)
     end
 
-    # Pending example with expectation to be skipped
     it 'is cooler than 200F' do
-      # Including the pending helper means that any code below it will be skipped
-      # Any code above it is still expected to pass
-      # You should include an explanation why the example is still pending
-      pending 'temperature not implemented yet'
       expect(coffee.temp).to be < (200)
     end
   end
