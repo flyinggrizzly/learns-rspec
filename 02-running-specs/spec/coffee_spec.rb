@@ -8,7 +8,11 @@ class Coffee
   end
 
   def price
-    1.00
+    if ingredients.empty?
+      1.00
+    else
+      1.25
+    end
   end
 end
 
