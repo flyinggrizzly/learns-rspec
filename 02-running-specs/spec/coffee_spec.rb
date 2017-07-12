@@ -14,6 +14,7 @@ end
 
 # Enables --only-failures flag for RSpec CLI
 RSpec.configure do |c|
+  c.filter_run_when_matching(focus: true)
   c.example_status_persistence_file_path = 'spec/examples.txt'
 end
 
