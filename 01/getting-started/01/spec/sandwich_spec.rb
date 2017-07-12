@@ -1,3 +1,10 @@
+# First example. Demonstrates three core RSpec APIs:
+# - describe
+# - it
+# - expect
+
+Sandwich = Struct.new(:taste, :toppings)
+
 RSpec.describe 'An ideal sandwich' do
   it 'is delicious' do
     sandwich = Sandwich.new('delicious', [])
