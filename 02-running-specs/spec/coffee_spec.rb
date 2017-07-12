@@ -26,6 +26,9 @@ RSpec.describe 'A cup of coffee' do
     expect(coffee.price).to eql(1.00)
   end
 
+  # Pending example
+  it 'is cooler than 200F'
+
   # context is an alias for describe, but makes it clear when describing a subset of behaviors
   # Tagged: run just this example with `rspec --tag milky:true`
   context 'with milk', milky: true do
@@ -33,5 +36,7 @@ RSpec.describe 'A cup of coffee' do
     it 'costs $1.25' do
       expect(coffee.price).to eql(1.25)
     end
+    # Pending example
+    it 'is light in color'
   end
 end
