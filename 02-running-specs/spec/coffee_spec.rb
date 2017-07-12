@@ -8,7 +8,7 @@ class Coffee
   end
 
   def price
-    1.00
+    1.00 + ingredients.size * 0.25
   end
 end
 
