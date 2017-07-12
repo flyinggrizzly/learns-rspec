@@ -12,6 +12,11 @@ class Coffee
   end
 end
 
+# Enables --only-failures flag for RSpec CLI
+RSpec.configure do |c|
+  c.example_status_persistence_file_path = 'spec/examples.txt'
+end
+
 RSpec.describe 'A cup of coffee' do
   let(:coffee) { Coffee.new }
 
