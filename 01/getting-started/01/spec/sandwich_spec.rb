@@ -11,4 +11,12 @@ RSpec.describe 'An ideal sandwich' do
     taste = sandwich.taste
     expect(taste).to eq('delicious')
   end
+
+  it 'lets me add toppings' do
+    sandwich = Sandwich.new('delicious', [])
+    sandwich.toppings << 'cheese'
+    toppings = sandwich.toppings
+    # check out this inverted expectation with .not_to
+    expect(toppings).not_to be_empty 
+  end
 end
