@@ -20,6 +20,10 @@ module ExpenseTracker
       post '/expenses', JSON.generate(coffee)
       # test that the post's response is OK
       expect(last_response.status).to eql(200)
+
+      # make sure we get the transaction ID back
+      parsed = JSON.parse(last_response.body)
+      expect(parsed).to include('expense_id' => a_kind_of(Integer))
     end
   end
 end
