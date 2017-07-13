@@ -17,8 +17,9 @@ module ExpenseTracker
         'date'   => '2017-06-10'
       }
 
-      # test that posting doesn't just crash the app by doing it
       post '/expenses', JSON.generate(coffee)
+      # test that the post's response is OK
+      expect(last_response.status).to eql(200)
     end
   end
 end
