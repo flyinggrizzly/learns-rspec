@@ -19,7 +19,7 @@ module ExpenseTracker
 
       post '/expenses', JSON.generate(coffee)
       # test that the post's response is OK
-      expect(last_response.status).to eql(200)
+      expect(last_response.status).to eq(200)
     end
   end
 end
