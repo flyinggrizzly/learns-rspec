@@ -23,7 +23,7 @@ module ExpenseTracker
 
       # test that we get a transaction ID back for future use
       parsed = JSON.parse(last_response.body)
-      expect(parsed).to include('expense_id' => a_kind_of(Intenger))
+      expect(parsed).to include('expense_id' => a_kind_of(Integer)) # would help specs if I spelt 'Integer' right
     end
   end
 end
