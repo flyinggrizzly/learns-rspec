@@ -26,29 +26,22 @@ module ExpenseTracker
 
     describe 'POST /expenses' do
       context 'when the expense is successfully recorded' do
-        it 'returns the expense id' do
-          expense = { 'gravitas' => 'shortfall' }
 
-          # Use the `allow` method from rspec-mocks so 
-          # we can configure the behavior of the dummy
-          # ledger object
+        # Extract shared code to reduce repetition
+        expense = { 'gcu' => 'liveware-problem' }
+        before do
           allow(ledger).to receive(:record)
             .with(expense)
             .and_return(RecordResult.new(true, 417, nil))
+        end
 
-          # and now, *finally*, we start testing
+        it 'returns the expense id' do
           post '/expenses', JSON.generate(expense)
           parsed = JSON.parse(last_response.body)
           expect(parsed).to include('expense_id' => 417)
         end
 
         it 'responds with a 200 (OK)' do
-          expense = { 'liveware' => 'problem' }
-
-          allow(ledger).to receive(:record)
-            .with(expense)
-            .and_return(RecordResult.new(true, 417, nil))
-
           post '/expenses', JSON.generate(expense)
           expect(last_response.status).to eq(200)
         end
