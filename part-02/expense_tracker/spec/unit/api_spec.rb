@@ -2,16 +2,7 @@ require_relative '../../app/api'
 require 'rack/test'
 
 module ExpenseTracker
-  # Define a dummy response class for the API
-  # Looks nothing like a real response would
-  # but that can be useful because it won't
-  # be confused with a real response. Doesn't
-  # matter what the response looks like, we're
-  # only interested that it responds for the
-  # moment.
-  RecordResult = Struct.new(:success?,
-                            :expense_id,
-                            :error_message)
+  # Remove dummy definition of RecordResult and move it to the Ledger definition
 
   RSpec.describe API do
     include Rack::Test::Methods
