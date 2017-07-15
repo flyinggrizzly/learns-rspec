@@ -14,6 +14,11 @@ module ExpenseTracker
       API.new(ledger: ledger)
     end
 
+    # Extract repeated shared code to helper
+    def response_body
+      JSON.parse(last_response.body)
+    end
+
     describe 'POST /expenses' do
       context 'when the expense is successfully recorded' do
 
@@ -27,8 +32,7 @@ module ExpenseTracker
 
         it 'returns the expense id' do
           post '/expenses', JSON.generate(expense)
-          parsed = JSON.parse(last_response.body)
-          expect(parsed).to include('expense_id' => 417)
+          expect(response_body).to include('expense_id' => 417)
         end
 
         it 'responds with a 200 (OK)' do
@@ -48,8 +52,7 @@ module ExpenseTracker
 
         it 'returns an error message' do
           post '/expenses', JSON.generate(expense)
-          parsed = JSON.parse(last_response.body)
-          expect(parsed).to include('error' => 'Expense incomplete')
+          expect(response_body).to include('error' => 'Expense incomplete')
         end
 
         it 'responds with a 422 (Unprocessable entity)' do
