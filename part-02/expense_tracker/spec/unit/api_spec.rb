@@ -2,7 +2,6 @@ require_relative '../../app/api'
 require 'rack/test'
 
 module ExpenseTracker
-  # Remove dummy definition of RecordResult and move it to the Ledger definition
 
   RSpec.describe API do
     include Rack::Test::Methods

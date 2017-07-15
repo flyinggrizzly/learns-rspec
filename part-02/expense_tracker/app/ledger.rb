@@ -5,5 +5,6 @@ module ExpenseTracker
                             :error_message)
 
   class Ledger
+    def record(expense); end
   end
 end
