@@ -6,5 +6,8 @@ module ExpenseTracker
 
   class Ledger
     def record(expense); end
+    def expenses_on(date);
+      # returns a hash: { date: 'date', count: Int, expenses: Array }
+    end
   end
 end

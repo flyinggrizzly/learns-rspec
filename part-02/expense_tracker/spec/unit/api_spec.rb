@@ -10,6 +10,15 @@ module ExpenseTracker
     # for testing with the instance_double method
     let(:ledger) { instance_double('ExpenseTracker::Ledger') }
 
+    # Define a dummy return object for the get requests
+    Expenses = Struct.new(:success?, 
+                          :count,
+                          :expenses,
+                          :error_message)
+    # Define a dummy expense object to include in the Expenses objects
+    Expense  = Struct.new(:date,
+                          :id)
+
     def app
       API.new(ledger: ledger)
     end
@@ -17,6 +26,51 @@ module ExpenseTracker
     # Extract repeated shared code to helper
     def response_body
       JSON.parse(last_response.body)
+    end
+
+    describe 'GET /expenses/:date' do
+      context 'when expenses exist on the given date' do
+        before do
+          allow(ledger).to receive(:expenses_on)
+            .with('2017-06-10')
+            .and_return({ date:     '2017-06-10',
+                          count:    2,
+                          expenses: ['expense_1',
+                                     'expense_2'] })
+        end
+        it 'returns the expense records as JSON' do
+          get '/expenses/2017-06-10'
+          expect(response_body).to eq({ 'date'     => '2017-06-10',
+                                        'count'    => 2,
+                                        'expenses' => ['expense_1',
+                                                       'expense_2'] })
+        end
+
+        it 'responds with a 200 OK' do
+          get '/expenses/2017-06-10'
+          expect(last_response.status).to eq(200)
+        end
+      end
+
+      context 'when there are no expenses on the given date' do
+        before do
+          allow(ledger).to receive(:expenses_on)
+            .with('2017-06-11')
+            .and_return({ date:    '2017-06-11',
+                          count:    0,
+                          expenses: [] })
+        end
+        it 'returns an empty array as JSON' do
+          get '/expenses/2017-06-11'
+          expect(response_body).to eq({ 'date'     => '2017-06-11',
+                                        'count'    => 0,
+                                        'expenses' => [] })
+        end
+        it 'responds with a 200 OK' do
+          get '/expenses/2017-06-11'
+          expect(last_response.status).to eq(200)
+        end
+      end
     end
 
     describe 'POST /expenses' do

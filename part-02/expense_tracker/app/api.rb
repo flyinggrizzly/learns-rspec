@@ -22,8 +22,7 @@ module ExpenseTracker
     end
 
     get '/expenses/:date' do
-      # return empty JSON to fix HTTP error in tests
-      JSON.generate([])
+      JSON.generate(@ledger.expenses_on(params[:date]))
     end
   end
 end
