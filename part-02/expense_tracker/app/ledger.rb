@@ -1,3 +1,5 @@
+require_relative '../config/sequel'
+
 module ExpenseTracker
   # Redefine the RecordResult struct in its permanent home
   RecordResult = Struct.new(:success?,

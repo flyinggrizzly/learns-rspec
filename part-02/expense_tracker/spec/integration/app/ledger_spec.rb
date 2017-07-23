@@ -1,5 +1,4 @@
 require_relative '../../../app/ledger'
-require_relative '../../../config/sequel'
 
 module ExpenseTracker
   # The `:aggregate_failures` property tells rspec to continue running and reporting
