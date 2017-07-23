@@ -5,7 +5,12 @@ module ExpenseTracker
                             :error_message)
 
   class Ledger
-    def record(expense); end
+    def record(expense)
+      DB[:expenses].insert(expense)
+      id = DB[:expenses].max(:id)
+      RecordResult.new(true, id, nil)
+    end
+
     def expenses_on(date);
       # returns a hash: { date: 'date', count: Int, expenses: Array }
     end
