@@ -1,11 +1,10 @@
 require_relative '../../../app/ledger'
 require_relative '../../../config/sequel'
-require_relative '../../support/db'
 
 module ExpenseTracker
   # The `:aggregate_failures` property tells rspec to continue running and reporting
   # failed expectations when there are more than one in the example.
-  RSpec.describe Ledger, :aggregate_failures do
+  RSpec.describe Ledger, :aggregate_failures, :db do
     let(:ledger) { Ledger.new }
     let(:expense) do
       {
@@ -31,7 +30,19 @@ module ExpenseTracker
             date: Date.iso8601('2017-06-10')
           )]
         end
-      end
-    end
-  end
+      end # context 'with a valid expense'
+
+      context 'when the expense lacks a payee' do
+        it 'rejects the expense as invalid' do
+          expense.delete('payee')
+          result = ledger.record(expense)
+
+          expect(result).not_to be_success
+          expect(result.expense_id).to eq(nil)
+          expect(result.error_message).to include('`payee` is required')
+          expect(DB[:expenses].count).to eq(0)
+        end
+      end # context 'when the expense lacks a payee'
+    end # description of '#record'
+  end # description of Ledger
 end
