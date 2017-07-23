@@ -20,7 +20,7 @@ module ExpenseTracker
     end
 
     def expenses_on(date);
-      # returns a hash: { date: 'date', count: Int, expenses: Array }
+      DB[:expenses].where(date: date).all
     end
   end
 end

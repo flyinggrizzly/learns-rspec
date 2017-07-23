@@ -21,9 +21,6 @@ module ExpenseTracker
     end
 
     it 'records submitted expenses' do
-
-      pending 'Need to persist expenses'
-
       # replace the previous version of posting the coffee expense with one using the new helper, and a few more for good measure
       coffee = post_expense(
         'payee'  => 'Starbucks',
